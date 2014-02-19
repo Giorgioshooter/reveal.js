@@ -57,36 +57,121 @@
 						</p>
 					</section>
 					<section>
+						<h4>Touch or click</h4>
 						<p>
 							The safest way is the use of 'click' event, but... 
 						</p>
 						<p class="fragment">what about speed?</p>
 						<p class="fragment">
-							It is know that the click has a 300ms delay to determine if it is a doubleclick event.
+							It is known that the click has a 300ms delay to determine if it is a doubleclick event.
 							This is in terms of responsiveness the mininum time we need to react in order the user 
 							to stay engaged which is gone by already by waiting for something else. 
 						</p>
 					</section>
 					<section>
+						<h4>Touch or click</h4>
 						<p> 
 							So use the touchstart instead.
 						</p>
+						<p class="fragment">
+							Which means anything, swipe , tap, zoom and so on.
+						</p>
+						<p class="fragment">
+							That is why when we design for touch based devices we need to be clear on the responsibilities.
+						</p>
 					</section>
-					<aside class="notes">
-						event list is touchstart touchend mouseover mousemove
-					</aside>
+					<section>
+						<h4>Event Cascade</h4
+						<p class="fragment">
+							Every tap has a sequence of events. for example a tap fires
+						</p>
+						<ul>
+							<li class="fragment">touchstart</li>
+							<li class="fragment">touchend</li>
+							<li class="fragment">mouseover</li>
+							<li class="fragment">mousemove</li>
+							<li class="fragment">mousedown</li>
+							<li class="fragment">mouseup</li>
+							<li class="fragment"><b>click</b></li>
+							<li class="fragment">:hover styles apply (!??)</li>
+						</ul>
+						<aside class="notes">
+							<p> single tap : </p>
+							<p> event list is touchstart touchend mouseover mousemove mousedown mouseup click and then the :hover applies.</p>
+							<p> Everything else than a single tap : </p>
+							<p> touchstart touchmove touchend and the a possible interaction on the element </p>
+							<p> Tap an other element means the mouseout event and the :hover styles are removed</p>
+						</aside>
+					</section>
+					<section>
+						<h4> 
+							Fun Fact about Safari
+						</h4>
+						<ul>
+						<li class="fragment">
+							On event chage the event cascade stops after mousemove 
+						</li>
+						<li class="fragment">
+							Also content change in safari is when DOM methods are used .appendChild() but innerHTML is not count.
+						</li>
+						</ul>
+					</section>
+					<section>
+						<h4>So Do we need each action to has its own event?</h4>
+						<p class="fragment">So far as anyone concern yes</p>
+						<p class="fragment"> But Microsoft merges basic events of touch and mouse to one pointer type event</p>
+						<p class="fragment"> So both actions could have for example pointedown pointermove and pointerup events only.</p>
+						<p class="fragment"> However the currently Microsoft's drag and Drop action based on the pointer events needs a help of CSS which it so optimal </p>
+					</section>
+					<section>
+						<h4>Hover</h4>
+						<p class="fragment">No need to be in touch events since it is not a continous event</p>
+					</section>
+					<section>
+						<h4>Gestures</h4>
+						<p class="fragment">Good Idea, not so usable cause of the lack of browser support (apple offers them)</p>
+						<p class="fragment">However Microsof has bigger list of events but ... <spa class="fragment"> <b>they work only with a horific code.</b></span></p>
+					</section>
 			</section>
 			<section>
 				<section>
 					<h2>Web Components</h2>
-
 					<p>
 						Author : Addy Osmani
 					</p>
-
 					<p>
 						How we can change and improve the semantic web by creating meaningfull web components with their own attributes.
 					</p>
+				</section>
+				<section>
+					<h4> What is a web Component? </h4>
+					<p class="fragment"> A tag that it has its own functions, properties and attributes.</p>
+					<p class="fragment"> Also its name describe explicilty its purpose</p>
+				</section>
+				<section>
+					<h4>Quick example of a custom web component</h4>
+						<div> 
+							<pre>
+								<code data-trim contenteditable>
+									function linkify( selector ) {
+									  if( supports3DTransforms ) {
+
+									    var nodes = document.querySelectorAll( selector );
+
+									    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
+									      var node = nodes[i];
+
+									      if( !node.className ) {
+									        node.className += ' roll';
+									      }
+									    }
+									  }
+									}
+								</code>
+							</pre>
+
+						</div>
+
 				</section>
 			</section>
 			<section>
@@ -146,43 +231,6 @@
 			</section>
 <!-- 
 				
-				<section>
-					<section>
-						<h2>Vertical Slides</h2>
-						<p>
-							Slides can be nested inside of other slides,
-							try pressing <a href="#" class="navigate-down">down</a>.
-						</p>
-						<a href="#" class="image navigate-down">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section>
-						<h2>Basement Level 1</h2>
-						<p>Press down or up to navigate.</p>
-					</section>
-					<section>
-						<h2>Basement Level 2</h2>
-						<p>Cornify</p>
-						<a class="test" href="http://cornify.com">
-							<img width="280" height="326" src="https://s3.amazonaws.com/hakim-static/reveal-js/cornify.gif" alt="Unicorn">
-						</a>
-					</section>
-					<section>
-						<h2>Basement Level 3</h2>
-						<p>That's it, time to go back up.</p>
-						<a href="#/2" class="image">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="-webkit-transform: rotate(180deg);">
-						</a>
-					</section>
-				</section>
-
-				<section>
-					<h2>Slides</h2>
-					<p>
-						Not a coder? No problem. There's a fully-featured visual editor for authoring these, try it out at <a href="http://slid.es" target="_blank">http://slid.es</a>.
-					</p>
-				</section>
 
 				<section>
 					<h2>Point of View</h2>
