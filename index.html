@@ -150,28 +150,32 @@
 				</section>
 				<section>
 					<h4>Quick example of a custom web component</h4>
-						<div> 
+						<div class="exibitA"> 
 							<pre>
 								<code data-trim contenteditable>
-									function linkify( selector ) {
-									  if( supports3DTransforms ) {
-
-									    var nodes = document.querySelectorAll( selector );
-
-									    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-									      var node = nodes[i];
-
-									      if( !node.className ) {
-									        node.className += ' roll';
-									      }
-									    }
-									  }
-									}
+<div id="tab-panel">
+	<ul>
+	    <li id="tab1">Tab 1</li>
+	    <li id="tab2">Tab 2</li>
+	</ul>
+	<div id="contentTab1"></div>
+	<div id="contentTab2"></div>
+</div>
 								</code>
 							</pre>
 
 						</div>
+						<div class="exibitB"> 
+							<pre>
+								<code data-trim contenteditable>
+<my-tabs>
+	<my-tab> ... </my-tab>
+	<my-tab> ... </my-tab>
+</my-tabs>
+								</code>
+							</pre>
 
+						</div>
 				</section>
 			</section>
 			<section>
