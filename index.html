@@ -40,7 +40,7 @@
 					<h1>London JS Conference</h1>
 					<h3>Key Points</h3>
 					<p>
-						<small>Created by <a href="http://hakim.se">Georgios Galatoulas</a> / <a href="http://twitter.com/gioshooter">@GioShooter</a></small>
+						<small>Created by <a href="http://github.org/GiorgioShooter">Georgios Galatoulas</a> / <a href="http://twitter.com/gioshooter">@GioShooter</a></small>
 					</p>
 				</section>
 
@@ -298,278 +298,170 @@
 					<h4>Client side attacks</h4>
 					<ul>
 						<li class="fragment">Never put not whitelisted data into your HMTL </li>
-						<li class="fragment">Cross Site Scripting (stored/persistent reflected/Non-persistent/DOM based)</li>
-						<li class="fragment"> ... </li>
+						<li class="fragment">Escape untrusted Data that are added into any HTML component</li>
+						<li class="fragment">Escape everything non-alphanumenic inside HTML attributes</li>
+						<li class="fragment">Put inside quotes JavaScript Generated untrusted data after it has been excaped or enconded</li>
+						<li class="fragment">Avoid eval() even implicit ones</li>
+						<li class="fragment">HTML excape JSON Values in an HMTL context and read the Data with JOSN parse</li>
+						<li class="fragment">Use HTTP-ONLY Flag on cookies</li>
+						<li class="fragment">Implement Content Security Policy</li>
+					</ul>
+					<aside class="notes">
+					Not escaping attributes that are likely to be executed like href, src, handlers inline.
+					Third rule is needed because a lot of people write the attributes without the code
+					Beware eva(), Function("String"), setInterval("")...
+					</aside>
+				</section>
+					<section>
+					<pre>
+						<code data-trim contenteditable>
+	var x = document.createElement("a"),
+	    y =document.createTextNode();
+	x.href = "x";
+	x.setAttribute("onlcick", "\u0061\u006c\0067..../");// cleary Malicious intentions
+	y.appendChild(x)
+						</code>
+					</pre>
+
+				</section>
+				<section>
+					<h4>HTML5 APIs</h4>
+					<p>We need to know from which server we get the response</p>
+					<p>We do not need to allow the attacker have a easy way to send back a false response.</p>
+					<p>Especially in CORS we need to validate all the urls we pass through</p>
+					<p>No wildcard in Access-Control-Allow-Origin !</p>
+					<p>localstorage in not secure enough we are better of using the sessionStorage.</p>
+					<p>Be aware of cache poisoning if the items are cached in localstorage.</p>
+					<p>DOS with web workers</p>
+					<p>Sandboxing untrusted data with sandbox</p>
+					<p>Prevent cache poisoning in man in the middle attacks. Solution is HTTPS.</p>
+					<p>With WebGL the attacket is able to block the GPU causing DOS. </p>
+				</section>
+				<section>
+					<h4> How are we sure that we have a secure web application?</h4>
+					<ul>
+						<li class="fragment">Audit tests</li>
+					</ul>
+				</section>
+				<section>
+					<h4>what we can achieve with auditing</h4>
+					<ul>
+						<li class="fragment">Find the intergration points</li>
+						<li class="fragment">Breath and Depth of attack surface</li>
+						<li class="fragment">Trust boundries</li>
+						<li class="fragment">Security implications base on selected technology</li>
+					</ul>
+					<p class="fragment">At any case any web application should have run vunerability tests (for example Metaexpoit tool)</p>
+					<p class="fragment">CI builds</p>
+				</section>
+				<section>
+					<h4> Penetration Testing </h4>
+					<ul>
+						<li>Manual testing</li>
+						<li>Leverage Profetional experience</li>
+						<li>Methodologies</li>
+						<li>Reports</li>
+						<li>People ! (no one is better that a man)</li>
+					</ul>
+					<aside class="notes">
+						<ol>
+							<li class="fragment"> Establish goals</li>
+							<li class="fragment"> Reconnaissance</li>
+							<li class="fragment"> Discovery</li>
+							<li class="fragment"> Exploitation</li>
+							<li class="fragment"> Brute forsing</li>
+							<li class="fragment"> Social Engineering</li>
+							<li class="fragment"> Taking Control</li>
+							<li class="fragment"> Pivoting</li>
+							<li class="fragment"> Evidence collection</li>
+							<li class="fragment"> Reporting</li>
+							<li class="fragment"> Remediation</li>
+					</aside>
+				</section>
+				<section>
+					<h4> Penetration Testing </h4>
+					<ul>
+						<li>Must run on an enviroment that provides as accurate environment as posible (db replicas and NDA's)</li>
+						<li> Beware about the scope of the test.<li>
+							<li>The best pen tester is usually external </li>
 					</ul>
 				</section>
 			</section>
+			
 			<section>
 				<section>
 					<h2>Multi-Device Interfaces</h2>
-
-					<p>
-						Author : Benjamin Foxall
-					</p>
-
+					<p>Author : Benjamin Foxall</p>
 					<p>
 						Designing for multiple Devices and how we can exploit each Device capabilities for 
 						enhanced experience
 					</p>
 				</section>
 				<section>
-					<h3> We have many device size out there! </h3>
-					<p> This means a lot of work to support all of them!</p>
-					<p class="fragment">But This is also a good thing!</p>
-					<p class="fragment">We just need to see what every Device has to offer</p>
+					<h3> We have many devices out there! </h3>
+					<p>A lot of support</p>
+					<p class="fragment">But it is also a good thing!</p>
+					<aside class="notes">
+						camera can take photos
+					</aside>
+				</section>
+				<section>
+					<h3> Designing for multiple devices and screen sizes</h3>
+					<p class="fragment"> Identify device capabilities</p>
+					<p class="fragment"> Adapt our web application to the device</p>
+					<p class="fragment"> Example: An audio web app in a touch device has the ability to change two sliders at once instead of one in the desktop version</p>
+				</section>
+				<section>
+					<h3> Tools </h3>
+					<p class="fragment"> Mondernizr for HTML5 and CCS3 detection !</p>
+					<aside class="notes">
+						<p > 
+							AppCache, battery, CSS animation/trnsforms/3D, Device Orientation
+							Drag and Drop, FullScreen, Geolocation, IndexDB, Touch Events,
+							webSocket, WebRTC, Webworkers
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h3>Transpots</h3>
+					<p class="fragment"> Different Devices communicate with each other or the main server</p>
+					<p class="fragment"> Subscribe and publish</p>
+					<p class="fragment"> Reat time transfer</p>
+					<p class="fragment"> Web Sockets and webRTC</p>
+				</section>
+				<section>
+					<h3>WebSockets</h3>
+					<p class="fragment"> bidirection communication with server and client</p>
+					<p class="fragment"> single handshake and the the connection stays alive</p>
+					<p class="fragment"> Server publishes a message and the client receives it without big delays</p>
+				</section>
+				<section>
+					<h3>WebRTC</h3>
+					<p class="fragment"> Protocol for peet to peer client communication</p>
+					<p class="fragment"> MediaStream, RTCPeerConnection, RTCDataChannels</p>
+					<p class="fragment"> quicker reaction on events</p>
 				</section>
 			</section>
 			<section>
 				<section>
-					<h2>Requal expressions explained</h2>
-
-					<p>
-						Author : Lea Verou
-					</p>
-
+					<h2>Regular expressions explained</h2>
+					<p>Author : Lea Verou</p>
 					<p>
 						Mostly a workshop explaining by example most of the possible rules we may need in JavaScript 
 						for regular expressions.
 					</p>
+					<p>
+						for the curious her  
+						<a href="http://lea.verou.me/regexplained/slides.html#slide8"> slides </a>
+						contain a proper regex test page where you can start practice your skills
+  					</p>
 				</section>
 			</section>
-<!-- 
-				
-
+			<section>
 				<section>
-					<h2>Point of View</h2>
-					<p>
-						Press <strong>ESC</strong> to enter the slide overview.
-					</p>
-					<p>
-						Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.
-					</p>
+					<h1>Thank you</h1>
 				</section>
-
-				<section>
-					<h2>Works in Mobile Safari</h2>
-					<p>
-						Try it out! You can swipe through the slides and pinch your way to the overview.
-					</p>
-				</section>
-
-				<section>
-					<h2>Marvelous Unordered List</h2>
-					<ul>
-						<li>No order here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-					</ul>
-				</section>
-
-				<section>
-					<h2>Fantastic Ordered List</h2>
-					<ol>
-						<li>One is smaller than...</li>
-						<li>Two is smaller than...</li>
-						<li>Three!</li>
-					</ol>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-						## Markdown support
-
-						For those of you who like that sort of thing. Instructions and a bit more info available [here](https://github.com/hakimel/reveal.js#markdown).
-
-						```
-						<section data-markdown>
-						  ## Markdown support
-
-						  For those of you who like that sort of thing.
-						  Instructions and a bit more info available [here](https://github.com/hakimel/reveal.js#markdown).
-						</section>
-						```
-					</script>
-				</section>
-
-				<section id="transitions">
-					<h2>Transition Styles</h2>
-					<p>
-						You can select from different transitions, like: <br>
-						<a href="?transition=cube#/transitions">Cube</a> -
-						<a href="?transition=page#/transitions">Page</a> -
-						<a href="?transition=concave#/transitions">Concave</a> -
-						<a href="?transition=zoom#/transitions">Zoom</a> -
-						<a href="?transition=linear#/transitions">Linear</a> -
-						<a href="?transition=fade#/transitions">Fade</a> -
-						<a href="?transition=none#/transitions">None</a> -
-						<a href="?#/transitions">Default</a>
-					</p>
-				</section>
-
-				<section id="themes">
-					<h2>Themes</h2>
-					<p>
-						Reveal.js comes with a few themes built in: <br>
-						<a href="?#/themes">Default</a> -
-						<a href="?theme=sky#/themes">Sky</a> -
-						<a href="?theme=beige#/themes">Beige</a> -
-						<a href="?theme=simple#/themes">Simple</a> -
-						<a href="?theme=serif#/themes">Serif</a> -
-						<a href="?theme=night#/themes">Night</a> <br>
-						<a href="?theme=moon#/themes">Moon</a> -
-						<a href="?theme=solarized#/themes">Solarized</a>
-					</p>
-					<p>
-						<small>
-							* Theme demos are loaded after the presentation which leads to flicker. In production you should load your theme in the <code>&lt;head&gt;</code> using a <code>&lt;link&gt;</code>.
-						</small>
-					</p>
-				</section>
-
-				<section>
-					<h2>Global State</h2>
-					<p>
-						Set <code>data-state="something"</code> on a slide and <code>"something"</code>
-						will be added as a class to the document element when the slide is open. This lets you
-						apply broader style changes, like switching the background.
-					</p>
-				</section>
-
-				<section data-state="customevent">
-					<h2>Custom Events</h2>
-					<p>
-						Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
-					</p>
-					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
-Reveal.addEventListener( 'customevent', function() {
-	console.log( '"customevent" has fired' );
-} );
-					</code></pre>
-				</section>
-
-				<section>
-					<section data-background="#007777">
-						<h2>Slide Backgrounds</h2>
-						<p>
-							Set <code>data-background="#007777"</code> on a slide to change the full page background to the given color. All CSS color formats are supported.
-						</p>
-						<a href="#" class="image navigate-down">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png">
-						<h2>Image Backgrounds</h2>
-						<pre><code>&lt;section data-background="image.png"&gt;</code></pre>
-					</section>
-					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" data-background-repeat="repeat" data-background-size="100px">
-						<h2>Repeated Image Backgrounds</h2>
-						<pre><code style="word-wrap: break-word;">&lt;section data-background="image.png" data-background-repeat="repeat" data-background-size="100px"&gt;</code></pre>
-					</section>
-				</section>
-
-				<section data-transition="linear" data-background="#4d7e65" data-background-transition="slide">
-					<h2>Background Transitions</h2>
-					<p>
-						Pass reveal.js the <code>backgroundTransition: 'slide'</code> config argument to make backgrounds slide rather than fade.
-					</p>
-				</section>
-
-				<section data-transition="linear" data-background="#8c4738" data-background-transition="slide">
-					<h2>Background Transition Override</h2>
-					<p>
-						You can override background transitions per slide by using <code>data-background-transition="slide"</code>.
-					</p>
-				</section>
-
-				<section>
-					<h2>Clever Quotes</h2>
-					<p>
-						These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;The nice thing about standards is that there are so many to choose from&rdquo;</q> and block:
-					</p>
-					<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;For years there has been a theory that millions of monkeys typing at random on millions of typewriters would
-						reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;
-					</blockquote>
-				</section>
-
-				<section>
-					<h2>Pretty Code</h2>
-					<pre><code data-trim contenteditable>
-function linkify( selector ) {
-  if( supports3DTransforms ) {
-
-    var nodes = document.querySelectorAll( selector );
-
-    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-      var node = nodes[i];
-
-      if( !node.className ) {
-        node.className += ' roll';
-      }
-    }
-  }
-}
-					</code></pre>
-					<p>Courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
-				</section>
-
-				<section>
-					<h2>Intergalactic Interconnections</h2>
-					<p>
-						You can link between slides internally,
-						<a href="#/2/3">like this</a>.
-					</p>
-				</section>
-
-				<section>
-					<section id="fragments">
-						<h2>Fragmented Views</h2>
-						<p>Hit the next arrow...</p>
-						<p class="fragment">... to step through ...</p>
-						<ol>
-							<li class="fragment"><code>any type</code></li>
-							<li class="fragment"><em>of view</em></li>
-							<li class="fragment"><strong>fragments</strong></li>
-						</ol>
-
-						<aside class="notes">
-							This slide has fragments which are also stepped through in the notes window.
-						</aside>
-					</section>
-					<section>
-						<h2>Fragment Styles</h2>
-						<p>There's a few styles of fragments, like:</p>
-						<p class="fragment grow">grow</p>
-						<p class="fragment shrink">shrink</p>
-						<p class="fragment roll-in">roll-in</p>
-						<p class="fragment fade-out">fade-out</p>
-						<p class="fragment highlight-red">highlight-red</p>
-						<p class="fragment highlight-green">highlight-green</p>
-						<p class="fragment highlight-blue">highlight-blue</p>
-						<p class="fragment current-visible">current-visible</p>
-						<p class="fragment highlight-current-blue">highlight-current-blue</p>
-					</section>
-				</section>
-
-				<section>
-					<h2>Spectacular image!</h2>
-					<a class="image" href="http://lab.hakim.se/meny/" target="_blank">
-						<img width="320" height="299" src="http://s3.amazonaws.com/hakim-static/portfolio/images/meny.png" alt="Meny">
-					</a>
-				</section>
-
-
-				<section>
-					<h2>Take a Moment</h2>
-					<p>
-						Press b or period on your keyboard to enter the 'paused' mode. This mode is helpful when you want to take distracting slides off the screen
-						during a presentation.
-					</p>
-				</section>
- -->
+			</section>
 			</div>
 
 		</div>
